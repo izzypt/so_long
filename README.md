@@ -49,3 +49,15 @@ int	main(void)
 	mlx = mlx_init();
 }
 ```
+
+# Writing pixels to a image 
+
+First of all, we should start by understanding what type of image ```mlx``` requires. 
+
+If we initiate an image, we will have to pass a few pointers to which it will write a few important variables. 
+
+The first one is the ```bpp```, also called the ```bits per pixel```. 
+
+As the pixels are basically ints, these usually are 4 bytes, however, this can differ if we are dealing with a small endian (which means we most likely are on a remote display and only have 8 bit colors).
+
+Now we can initialize the image with size 1920×1080 as follows:

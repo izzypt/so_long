@@ -49,7 +49,43 @@ int	main(void)
 	mlx = mlx_init();
 }
 ```
+# Minilibx - The key functions
 
+- ```mlx_init()```
+  - This will establish a connection to the correct graphical system and will return a void * which holds the location of our current MLX instance.
+  -  Exemplo :
+  ```
+	int	main(void)
+	{
+		void	*mlx;
+
+		mlx = mlx_init();
+	}
+  ```
+- ```mlx_new_window()``` 
+  - It will return a pointer to the window we have just created. 
+  - We can give the window height, width and a title.
+  - Exemplo :
+  ```
+    mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
+  ```
+- ```mlx_destroy_window()```  
+  - Is responsible for freeing all the ressources that have been allocated for the window when it is no longer needed.
+  - Exemplo :
+  ```
+    mlx_destroy_window(mlx_ptr, win_ptr);
+  ```
+- ```mlx_destroy_display()``` 
+  - Use it to destroy the display before using ```free()``` on the ```mlx_init()``` pointer.
+  - Exemplo :
+  ```
+    mlx_destroy_display(mlx_ptr);
+  ``` 
+- ```mlx_loop()```
+  - THis loop will keep our mx instance running and waiting for inputs.
+  ```
+	mlx_loop(mlx);
+  ```
 # Writing pixels to a image 
 
 First of all, we should start by understanding what type of image ```mlx``` requires. 

@@ -62,7 +62,7 @@ int	main(void)
 		mlx = mlx_init();
 	}
   ```
-- ```mlx_new_window()``` 
+- ```mlx_new_window(void *mlx_ptr, int size_x, int size_y, char *title)``` 
   - It will return a pointer to the window we have just created. 
   - We can give the window height, width and a title.
   - Exemplo :
@@ -73,7 +73,7 @@ int	main(void)
   - Is responsible for freeing all the ressources that have been allocated for the window when it is no longer needed.
   - Exemplo :
   ```
-    mlx_destroy_window(mlx_ptr, win_ptr);
+    mlx_destroy_window(void *mlx_ptr, void *win_ptr);
   ```
 - ```mlx_destroy_display()``` 
   - Use it to destroy the display before using ```free()``` on the ```mlx_init()``` pointer.

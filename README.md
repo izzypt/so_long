@@ -26,11 +26,11 @@ https://github.com/42Paris/minilibx-linux
 
 - Next, follow the instruction and compile the MiniLibx with "make" or "./config".
 
-After that, in the file you want to use MiniLibx on , you use ```#include "mlx_linux/mlx.h"```
+After that, in the file you want to use MiniLibx on , you use ```#include "mlx_linux/mlx.h"``` or ```#include <mlx.h>``` (try one or the other)
 
 - Also, keep in mind that when compiling you will have to use those flags :
 
-```-Lmlx_linux/ -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz```
+```gcc <yourfile>.c -Lmlx_linux/ -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz```
 
 
 # Initialization
@@ -82,7 +82,7 @@ int	main(void)
     mlx_destroy_display(mlx_ptr);
   ``` 
 - ```mlx_loop()```
-  - THis loop will keep our mx instance running and waiting for inputs.
+  - This loop will keep our mlx instance running and waiting for inputs.
   ```
 	mlx_loop(mlx);
   ```

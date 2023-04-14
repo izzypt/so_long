@@ -86,6 +86,18 @@ int	main(void)
   ```
 	mlx_loop(mlx);
   ```
+- ```mlx_pixel_put(void *mlx_ptr, void *win_ptr, int x, int y, int color)``` 
+  - This function draws a defined pixel in the window <ins>win_ptr</ins> using the (x, y) coordinates, and the specified color.
+  - The origin (0, 0), is the upper left corner of the window, the x and y axis respectively pointing right and down.
+- ```mlx_string_put(void *mlx_ptr, void *win_ptr, int x, int y, int color, char *string)``` 
+  - The specified string will be displayed at (x, y)
+  - In both functions above, it is impossbible to display anything outside the specified window.
+
+- ```mlx_key_hook(void *win_ptr, int (*funct_ptr)(), void *param)```
+- ```mlx_mouse_hook(void *win_ptr, int (*funct_ptr)(), void *param)```
+- ```mlx_expose_hook(void *win_ptr, int (*funct_ptr)(), void *param)```
+- ```mlx_loop_hook(void *win_ptr, int (*funct_ptr)(), void *param)```
+- 
 # Writing pixels to a image 
 
 First of all, we should start by understanding what type of image ```mlx``` requires. 

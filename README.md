@@ -97,6 +97,8 @@ int	main(void)
 - ```mlx_mouse_hook(void *win_ptr, int (*funct_ptr)(), void *param)```
 - ```mlx_expose_hook(void *win_ptr, int (*funct_ptr)(), void *param)```
 - ```mlx_loop_hook(void *win_ptr, int (*funct_ptr)(), void *param)```
+- ```int		mlx_put_image_to_window(void *mlx_ptr, void *win_ptr, void *img_ptr, int x, int y);```
+
 
 # Writing pixels to a image 
 

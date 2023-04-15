@@ -5,26 +5,42 @@ int	validate_map(char **map, s_map_data *map_info)
 {
 	int	i;
 	int	j;
+	int lines;
+	int line_length;
 
 	i = 0;
 	j = 0;
-	printf("The map has %d lines\n", map_info->num_of_lines);
-	while (i <= map_info->num_of_lines)
+	line_length = ft_strlen(map[i]);
+	lines = map_info->num_of_lines;
+	printf("The map has %d lines with a length of %d\n", lines, line_length);
+	/*while (i < map_info->num_of_lines)
 	{
-		while(map[i][j]!= '\0')
+		printf("Line %d: %s\n", i, map[i]);
+		printf("Line %d: first char %c\n", i, map[i][j]);
+		printf("%d\n", (map[1][1] == '1'));
+
+		i++;
+	}*/
+	while (i < lines)
+	{
+		while(map[i][j] != '\0' && map[i][j] != '\n')
 		{
-			if (i == 0 && map[i][j] != 1)
+			if (map[0][j] != '1')
 			{
+				printf("the char is %c", map[i][j]);
 				perror("Error in map. First line must be a wall");
 				return (0);
 			}
-			else if (map[i][0] == 1)
+			else if (map[i][0] != '1')
 			{
 				perror("Error in map. First column must be a wall");
 			}
+			j++;
 		}
+		j = 0;
 		i++;
 	}
+	printf("The map is valid\n");
 	return (1);
 }
 

@@ -1,25 +1,38 @@
-CC=gcc
-CFLAGS=-Wall -Wextra
-LDFLAGS=-L mlx_linux/ -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz
-LIBFT = Libft_SB
-SRC=so_long.c
-OBJ=$(SRC:.c=.o) get_next_line.o Libft_SB/libft.a
-EXEC=so_long
+NAME=SO_LONG
+CFLAGS= -Wall -Wextra
+CC=cc
+SRC=main.c get_next_line/get_next_line.c
 
-all: $(EXEC)
+MLX_LIB=mlx_linux/libmlx.a
 
-$(EXEC): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(LDFLAGS) -o $(EXEC)
+LIBFT_LIB=Libft_SB/libft.a
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+PRINTF_LIB=printf/printf.a
 
-get_next_line.o: get_next_line.c
-	$(CC) $(CFLAGS) -c $< -o $@
+LDFLAGS= $(PRINTF_LIB) $(LIBFT_LIB) $(MLX_LIB) -lXext -lX11 -lm -lz
 
-Libft_SB/libft.a:
-	cd ./Libft_SB && make
+all : $(NAME)
+
+$(NAME) : $(SRC) $(MLX_LIB) $(LIBFT_LIB) $(PRINTF_LIB)
+	$(CC) $(SRC) -o $(NAME) $(CFLAGS) $(LDFLAGS)
+
+$(MLX_LIB):
+	cd mlx_linux && make
+	cd ..
+
+$(LIBFT_LIB):
+	cd Libft_SB && make
+	cd ..
+
+$(PRINTF_LIB):
+	cd ./printf && make
+	cd ..
 
 clean:
-	rm -f $(OBJ) $(EXEC)
+	rm -f $(NAME)
 	cd ./Libft_SB && make clean
+	cd ..
+	cd ./mlx_linux && make clean
+	cd ..
+	cd ./printf && make clean
+	cd ..

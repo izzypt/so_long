@@ -1,4 +1,0 @@
-Muitas linhas para testar
-que as bibliotecas importaram
-correctamente as libs e os .h
-=)

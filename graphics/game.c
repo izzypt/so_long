@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smagalha <smagalha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/28 13:24:28 by smagalha          #+#    #+#             */
-/*   Updated: 2022/12/11 11:25:07 by smagalha         ###   ########.fr       */
+/*   Created: 2023/04/16 16:13:10 by smagalha          #+#    #+#             */
+/*   Updated: 2023/04/16 16:23:30 by smagalha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "../so_long.h"
 
-size_t	ft_strlen(const char *s)
+void	game_init(void)
 {
-	int	counter;
 
-	counter = 0;
-	while (s[counter] != '\0')
-	{
-		counter++;
-	}
-	return (counter);
 }

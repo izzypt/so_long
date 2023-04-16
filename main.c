@@ -1,93 +1,95 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: smagalha <smagalha@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/16 13:55:50 by smagalha          #+#    #+#             */
+/*   Updated: 2023/04/16 19:26:38 by smagalha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
-
-int	validate_map(char **map, s_map_data *map_info)
+int	validate_map(char **map, t_map_data *map_info)
 {
-	int	i;
-	int	j;
-	int lines;
-	int line_length;
+	int		i;
+	int		j;
 
 	i = 0;
 	j = 0;
-	line_length = ft_strlen(map[i]);
-	lines = map_info->num_of_lines;
-	printf("The map has %d lines with a length of %d\n", lines, line_length);
-	/*while (i < map_info->num_of_lines)
+	validate_edges(map[0], map[map_info->lines_num - 1]);
+	while (i < map_info->lines_num)
 	{
-		printf("Line %d: %s\n", i, map[i]);
-		printf("Line %d: first char %c\n", i, map[i][j]);
-		printf("%d\n", (map[1][1] == '1'));
-
-		i++;
-	}*/
-	while (i < lines)
-	{
-		while(map[i][j] != '\0' && map[i][j] != '\n')
+		validate_line_len(map[i], map_info->line_len);
+		validate_sides(map[i], map_info->line_len - 2);
+		while (map[i][j] != '\0' && map[i][j] != '\n')
 		{
-			if (map[0][j] != '1')
-			{
-				printf("the char is %c", map[i][j]);
-				perror("Error in map. First line must be a wall");
-				return (0);
-			}
-			else if (map[i][0] != '1')
-			{
-				perror("Error in map. First column must be a wall");
-			}
+			count_map_components(map[i][j], map_info);
 			j++;
 		}
 		j = 0;
 		i++;
 	}
 	printf("The map is valid\n");
+	printf("Map info:\n");
+	printf("Walls: %d\n", map_info->walls_num);
+	printf("Floors: %d\n", map_info->floor_num);
+	printf("Collectibles: %d\n", map_info->collectables_num);
+	printf("Exits: %d\n", map_info->exit_num);
+	printf("Players: %d\n", map_info->players_num);
 	return (1);
 }
 
-char **create_matrix(int fd)
+//Read the map line by line and assign it to a 2D array.
+char	**create_matrix(int fd)
 {
-	s_map_data	*map_data;
-	char	**matrix;
-	int		i;
-	int		j;
+	t_map_data	*map_data;
+	char		**matrix;
+	int			i;
 
 	i = 0;
-	j = 0;
-	map_data = malloc(sizeof(s_map_data) + 1);
-	matrix = malloc(sizeof(char*) * 1000);
+	map_data = malloc(sizeof(t_map_data) + 1);
+	matrix = malloc(sizeof(char *) * 1000);
 	if (matrix == NULL)
-	{
-        perror("malloc failed to allocate memory for the map matrix");
-        exit(1);
-    }
+		exit(1);
 	while (1)
 	{
 		matrix[i] = get_next_line(fd);
 		if (matrix[i] == NULL)
 		{
-			map_data->num_of_lines = i;
-			break;
+			map_data->lines_num = i;
+			map_data->line_len = ft_strlen(matrix[0]);
+			map_data->collectables_num = 0;
+			break ;
 		}
 		i++;
 	}
 	validate_map(matrix, map_data);
+	close(fd);
 	return (matrix);
 }
 
-int main(int argc, char **argv)
+//Open the map and and call function to create matrix from it
+void	read_map(char *map)
 {
-    int fd;
-	void	*mlx;
-	void	*window;
+	int	fd;
+
+	fd = open(map, O_RDONLY);
+	create_matrix(fd);
+}
+
+int	main(int argc, char **argv)
+{
+	int		fd;
 
 	if (argc < 2)
 	{
 		perror("Please provide a map\n");
 		return (0);
 	}
-    fd = open(argv[1], O_RDONLY);
-	create_matrix(fd);
-	/*mlx = mlx_init();
-	window = mlx_new_window(mlx, 500, 500, "Hello world!");
-	mlx_loop(mlx);*/
+	read_map(argv[1]);
+	draw_window();
+	//mlx_key_hook(vars.win_ptr, &deal_key, &vars);
 }

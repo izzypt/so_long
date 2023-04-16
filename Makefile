@@ -1,7 +1,7 @@
 NAME=SO_LONG
 CFLAGS= -Wall -Wextra
 CC=cc
-SRC=main.c get_next_line/get_next_line.c
+SRC=main.c get_next_line/get_next_line.c validators/map_validators.c graphics/draw.c
 
 MLX_LIB=mlx_linux/libmlx.a
 

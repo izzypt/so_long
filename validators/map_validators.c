@@ -3,30 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   map_validators.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
+/*   By: smagalha <smagalha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 15:45:08 by smagalha          #+#    #+#             */
-/*   Updated: 2023/04/17 02:23:06 by simao            ###   ########.fr       */
+/*   Updated: 2023/04/17 18:52:02 by smagalha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-int	validate_map(char **map, t_map_data *map_info)
+int	validate_map(char **matrix)
 {
 	int		i;
 	int		j;
 
 	i = 0;
 	j = 0;
-	validate_edges(map[0], map[map_info->lines_num - 1]);
-	while (i < map_info->lines_num)
+	validate_edges(matrix[0], matrix[map()->lines_num - 1]);
+	while (++i < map()->lines_num)
 	{
-		validate_line_len(map[i], map_info->line_len);
-		validate_sides(map[i], map_info->line_len - 2);
-		while (map[i][j] != '\0' && map[i][j] != '\n')
+		validate_line_len(matrix[i], map()->line_len);
+		validate_sides(matrix[i], map()->line_len - 2);
+		while (matrix[i][j] != '\0' && matrix[i][j] != '\n')
 		{
-			count_map_components(map[i][j], map_info);
+			count_map_components(matrix[i][j]);
 			j++;
 		}
 		j = 0;
@@ -34,11 +34,11 @@ int	validate_map(char **map, t_map_data *map_info)
 	}
 	printf("The map is valid\n");
 	printf("Map info:\n");
-	printf("Walls: %d\n", map_info->walls_num);
-	printf("Floors: %d\n", map_info->floor_num);
-	printf("Collectibles: %d\n", map_info->collectables_num);
-	printf("Exits: %d\n", map_info->exit_num);
-	printf("Players: %d\n", map_info->players_num);
+	printf("Walls: %d\n", map()->walls_num);
+	printf("Floors: %d\n", map()->floor_num);
+	printf("Collectibles: %d\n", map()->collectables_num);
+	printf("Exits: %d\n", map()->exit_num);
+	printf("Players: %d\n", map()->players_num);
 	return (1);
 }
 
@@ -92,17 +92,17 @@ int	validate_sides(char *line, int last_char_pos)
 	return (1);
 }
 
-int	count_map_components(char element, t_map_data *map_info)
+int	count_map_components(char element)
 {
 	if (element == 'C')
-		map_info->collectables_num += 1;
+		map()->collectables_num += 1;
 	if (element == '1')
-		map_info->walls_num += 1;
+		map()->walls_num += 1;
 	if (element == '0')
-		map_info->floor_num += 1;
+		map()->floor_num += 1;
 	if (element == 'P')
-		map_info->players_num += 1;
+		map()->players_num += 1;
 	if (element == 'E')
-		map_info->exit_num += 1;
+		map()->exit_num += 1;
 	return (1);
 }

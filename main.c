@@ -3,45 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
+/*   By: smagalha <smagalha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 13:55:50 by smagalha          #+#    #+#             */
-/*   Updated: 2023/04/17 12:05:55 by simao            ###   ########.fr       */
+/*   Updated: 2023/04/17 18:59:12 by smagalha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-char	**create_matrix(int fd)
+t_map_data	*map(void)
 {
-	t_map_data	*map_data;
+	static t_map_data	map;
+
+	return (&map);
+}
+
+char	**create_matrix(char *map_path)
+{
 	char		**matrix;
 	int			i;
+	int			fd;
 
-	i = 0;
-	map_data = malloc(sizeof(t_map_data) + 1);
-	matrix = malloc(sizeof(char *) * 1000);
+	i = -1;
+	fd = open(map_path, O_RDONLY);
+	matrix = malloc(sizeof(char *) * map()->lines_num + 1);
 	if (matrix == NULL)
 		exit(1);
-	while (1)
-	{
+	while (++i < map()->lines_num)
 		matrix[i] = get_next_line(fd);
-		if (matrix[i] == NULL)
-		{
-			map_data->lines_num = i;
-			map_data->line_len = ft_strlen(matrix[0]);
-			map_data->collectables_num = 0;
-			break ;
-		}
-		i++;
-	}
-	validate_map(matrix, map_data);
-	draw_window(matrix, map_data);
+	map()->line_len = ft_strlen(matrix[0]);
+	validate_map(matrix);
+	draw_window(matrix);
 	close(fd);
 	return (matrix);
 }
 
-void	read_map(char *map)
+void	read_map(char *map,  t_map_data *map_data)
 {
 	int		fd;
 
@@ -51,7 +49,15 @@ void	read_map(char *map)
 		perror("cannot open provided map");
 		exit(1);
 	}
-	create_matrix(fd);
+	while (1)
+	{
+		if (get_next_line(fd))
+			map_data->lines_num ++;
+		else
+			break ;
+	}
+	close(fd);
+	create_matrix(map);
 }
 
 int	main(int argc, char **argv)
@@ -61,6 +67,6 @@ int	main(int argc, char **argv)
 		perror("Please provide a map\n");
 		return (0);
 	}
-	read_map(argv[1]);
+	read_map(argv[1], map());
 }
 //mlx_key_hook(vars.win_ptr, &deal_key, &vars);

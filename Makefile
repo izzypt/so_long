@@ -9,7 +9,7 @@ LIBFT_LIB=Libft_SB/libft.a
 
 PRINTF_LIB=printf/printf.a
 
-LDFLAGS= $(PRINTF_LIB) $(LIBFT_LIB) $(MLX_LIB) -lXext -lX11 -lm -lz
+LDFLAGS= $(PRINTF_LIB) $(LIBFT_LIB) $(MLX_LIB) -lXext -lX11 -lm -lz -g -fsanitize=address
 
 all : $(NAME)
 
@@ -36,3 +36,13 @@ clean:
 	cd ..
 	cd ./printf && make clean
 	cd ..
+
+fclean:		clean
+		rm -rf $(NAME)
+
+valgrind:	re
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --log-file=valgrind-out.txt ./cub3d maps/line.cub 
+
+re:			fclean all
+
+.PHONY: all clean fclean re

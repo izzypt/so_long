@@ -6,7 +6,7 @@
 /*   By: smagalha <smagalha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 15:45:08 by smagalha          #+#    #+#             */
-/*   Updated: 2023/04/17 18:52:02 by smagalha         ###   ########.fr       */
+/*   Updated: 2023/04/17 19:43:04 by smagalha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	validate_map(char **matrix)
 	while (++i < map()->lines_num)
 	{
 		validate_line_len(matrix[i], map()->line_len);
-		validate_sides(matrix[i], map()->line_len - 2);
+		validate_sides(matrix[i]);
 		while (matrix[i][j] != '\0' && matrix[i][j] != '\n')
 		{
 			count_map_components(matrix[i][j]);
@@ -75,7 +75,7 @@ int	validate_edges(char	*top_line, char *bottom_line)
 	return (1);
 }
 
-int	validate_sides(char *line, int last_char_pos)
+int	validate_sides(char *line)
 {
 	if (line[0] != '1')
 	{
@@ -83,7 +83,7 @@ int	validate_sides(char *line, int last_char_pos)
 		exit(1);
 		return (0);
 	}
-	if (line[last_char_pos] != '1')
+	if (line[map()->line_len - 2] != '1')
 	{
 		perror("Last column must always be a wall");
 		exit(1);

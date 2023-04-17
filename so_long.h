@@ -6,7 +6,7 @@
 /*   By: smagalha <smagalha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 14:28:01 by smagalha          #+#    #+#             */
-/*   Updated: 2023/04/17 18:51:19 by smagalha         ###   ########.fr       */
+/*   Updated: 2023/04/17 20:32:57 by smagalha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,23 @@
 
 # define ROCK "./sprites/beach_walls/rock.xpm"
 # define WATER "./sprites/beach_walls/water.xpm"
-# define PIXEL_WDTH 32
-# define PIXEL_HEIGHT 32
+# define FISH "./sprites/collectibles/fish.xpm"
+# define PLAYER_UP "./sprites/boat/boat_up.xpm"
+# define PLAYER_DOWN "./sprites/boat/boat_down.xpm"
+# define PLAYER_LEFT "./sprites/boat/boat_left.xpm"
+# define PLAYER_RIGHT "./sprites/boat/boat_right.xpm"
+# define EXIT "./sprites/exits/portal.xpm"
 
 typedef struct t_sprites
 {
 	void	*rock;
 	void	*water;
+	void	*player_up;
+	void	*player_right;
+	void	*player_left;
+	void	*player_down;
+	void	*fish;
+	void	*exit;
 	int		width;
 	int		height;
 }	t_sprites;
@@ -47,11 +57,12 @@ typedef struct t_map_data
 int			validate_map(char **matrix);
 int			validate_line_len(char *line, size_t valid_len);
 int			validate_edges(char *top_line, char *bottom_line);
-int			validate_sides(char *line, int last_char_pos);
+int			validate_sides(char *line);
 int			count_map_components(char element);
 void		draw_window(char **map_matrix);
-void		draw_player(void *mlx, void *window);
-void		draw_walls(char **map);
+void		draw_player(void);
+void		draw_walls(char **matrix);
+void		init_sprites(t_sprites *spr);
 t_map_data	*map(void);
 
 #endif  

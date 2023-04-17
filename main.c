@@ -6,7 +6,7 @@
 /*   By: smagalha <smagalha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 13:55:50 by smagalha          #+#    #+#             */
-/*   Updated: 2023/04/17 18:59:12 by smagalha         ###   ########.fr       */
+/*   Updated: 2023/04/17 19:41:04 by smagalha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	**create_matrix(char *map_path)
 	return (matrix);
 }
 
-void	read_map(char *map,  t_map_data *map_data)
+void	read_map(char *map, t_map_data *map_data)
 {
 	int		fd;
 

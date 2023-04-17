@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 16:03:15 by smagalha          #+#    #+#             */
-/*   Updated: 2023/04/17 12:11:37 by simao            ###   ########.fr       */
+/*   Updated: 2023/04/17 14:40:41 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,22 +51,24 @@ void	draw_walls(char **map_matrix, void *mlx, void *window)
 	lft_mid_wall = mlx_xpm_file_to_image(mlx, LFT_MID_WALL_PTH, &wdth, &hght);
 	bot_rgt_corner = mlx_xpm_file_to_image(mlx, BOT_RGT_CRNR_PTH, &wdth, &hght);
 	bot_mid = mlx_xpm_file_to_image(mlx, BOT_MID_WALL_PTH, &wdth, &hght);
-	while (map_matrix[0][i] != '\n')
+	while (map_matrix[j] != 0)
 	{
-		if (i == 0)
-			mlx_put_image_to_window(mlx, window, left_corner, 0, 0);
-		else if (map_matrix[0][i + 1] == '\n')
-			mlx_put_image_to_window(mlx, window, right_corner, 32 * i, 0);
-		else
-			mlx_put_image_to_window(mlx, window, top_mid, 32 * i, 0);
-		i++;
-	}
-	i = 0;
-	while (map_matrix[j][0] < 5)
-	{
-		if (j != 0)
-			mlx_put_image_to_window(mlx, window, lft_mid_wall, 0, 32 * i);
-		printf("%c ", map_matrix[j][0]);
+		while (map_matrix[j][i] != '\n')
+		{
+			if (j == 0)
+			{
+				if (i == 0)
+					mlx_put_image_to_window(mlx, window, left_corner, 0, 0);
+				else if (map_matrix[0][i + 1] == '\n')
+					mlx_put_image_to_window(mlx, window, right_corner, 32 * i, 0);
+				else
+					mlx_put_image_to_window(mlx, window, top_mid, 32 * i, 0);
+			}
+			if (j != 0)
+				mlx_put_image_to_window(mlx, window, lft_mid_wall, 0, j * 32);
+			i++;
+		}
+		i = 0;
 		j++;
 	}
 }

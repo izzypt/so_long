@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 16:03:15 by smagalha          #+#    #+#             */
-/*   Updated: 2023/04/17 14:40:41 by simao            ###   ########.fr       */
+/*   Updated: 2023/04/17 15:39:00 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,48 +24,45 @@ void	draw_window(char **map_matrix, t_map_data *map_info)
 	mlx = mlx_init();
 	window = mlx_new_window(mlx, win_width, win_height, "SoLong!");
 	draw_player(mlx, window);
-	draw_walls(map_matrix, mlx, window);
+	draw_walls(map_matrix, mlx, window, map_info);
 	mlx_loop(mlx);
 }
 
-void	draw_walls(char **map_matrix, void *mlx, void *window)
+void	draw_walls(char **map, void *mlx, void *win, t_map_data *map_inf)
 {
 	int		i;
 	int		j;
-	void	*left_corner;
-	void	*right_corner;
-	void	*top_mid;
-	void	*lft_mid_wall;
-	void	*bot_rgt_corner;
-	void	*bot_mid;
+	void	*rock;
+	void	*water;
 	int		wdth;
-	int		hght;
+	int		height;
+
 
 	i = 0;
 	j = 0;
 	wdth = 32;
-	hght = 32;
-	left_corner = mlx_xpm_file_to_image(mlx, TOP_LFT_CRNR_PTH, &wdth, &hght);
-	right_corner = mlx_xpm_file_to_image(mlx, TOP_RGT_CRNR_PTH, &wdth, &hght);
-	top_mid = mlx_xpm_file_to_image(mlx, TOP_MID_PTH, &wdth, &hght);
-	lft_mid_wall = mlx_xpm_file_to_image(mlx, LFT_MID_WALL_PTH, &wdth, &hght);
-	bot_rgt_corner = mlx_xpm_file_to_image(mlx, BOT_RGT_CRNR_PTH, &wdth, &hght);
-	bot_mid = mlx_xpm_file_to_image(mlx, BOT_MID_WALL_PTH, &wdth, &hght);
-	while (map_matrix[j] != 0)
+	height = 32;
+	rock = mlx_xpm_file_to_image(mlx, ROCK, &wdth, &height);
+	water = mlx_xpm_file_to_image(mlx, WATER, &wdth, &height);
+	while (map[j] != 0)
 	{
-		while (map_matrix[j][i] != '\n')
+		while (map[j][i] != '\n')
 		{
 			if (j == 0)
+				mlx_put_image_to_window(mlx, win, rock, i * 32, 0);
+			else if (j != 0 && i == 0)
+				mlx_put_image_to_window(mlx, win, rock, 0, j * 32);
+			else if (j == map_inf->lines_num - 1)
+				mlx_put_image_to_window(mlx, win, rock, i * 32, j * 32);
+			else if ((size_t)i == map_inf->line_len - 2)
+				mlx_put_image_to_window(mlx, win, rock, i * 32, j * 32);
+			else
 			{
-				if (i == 0)
-					mlx_put_image_to_window(mlx, window, left_corner, 0, 0);
-				else if (map_matrix[0][i + 1] == '\n')
-					mlx_put_image_to_window(mlx, window, right_corner, 32 * i, 0);
+				if (map[j][i] == '1')
+					mlx_put_image_to_window(mlx, win, rock, i * 32, j * 32);
 				else
-					mlx_put_image_to_window(mlx, window, top_mid, 32 * i, 0);
+					mlx_put_image_to_window(mlx, win, water, i * 32, j * 32);
 			}
-			if (j != 0)
-				mlx_put_image_to_window(mlx, window, lft_mid_wall, 0, j * 32);
 			i++;
 		}
 		i = 0;

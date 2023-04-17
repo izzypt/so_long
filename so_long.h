@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 14:28:01 by smagalha          #+#    #+#             */
-/*   Updated: 2023/04/17 14:40:21 by simao            ###   ########.fr       */
+/*   Updated: 2023/04/17 15:18:43 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,10 @@
 # include "mlx_linux/mlx.h"
 # include "printf/ft_printf.h"
 
-# define TOP_LFT_CRNR_PTH "./sprites/beach_walls/left_corner.xpm"
-# define TOP_RGT_CRNR_PTH "./sprites/beach_walls/right_corner.xpm"
-# define TOP_MID_PTH "./sprites/beach_walls/top_mid.xpm"
-# define LFT_MID_WALL_PTH "./sprites/beach_walls/left_mid.xpm"
-# define RGHT_MID_WALL_PTH "./sprites/walls/right_mid.xpm"
-# define BOT_MID_WALL_PTH "./sprites/walls/bottom_mid.xpm"
-# define BOT_RGT_CRNR_PTH "./sprites/walls/bottom_right_corner.xpm"
-# define BOT_LFT_CRNR_PTH "./sprites/walls/bottom_left_corner.xpm"
+# define ROCK "./sprites/beach_walls/rock.xpm"
+# define WATER "./sprites/beach_walls/water.xpm"
+# define PIXEL_WDTH 32
+# define PIXEL_HEIGHT 32
 
 typedef struct t_map_data
 {
@@ -44,6 +40,6 @@ int		validate_sides(char *line, int last_char_pos);
 int		count_map_components(char element, t_map_data *map_info);
 void	draw_window(char **map_matrix, t_map_data *map_info);
 void	draw_player(void *mlx, void *window);
-void	draw_walls(char **map_matrix, void *mlx, void *window);
+void	draw_walls(char **map, void *mlx, void *win, t_map_data *map_inf);
 
 #endif  

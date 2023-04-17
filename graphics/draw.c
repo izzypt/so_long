@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 16:03:15 by smagalha          #+#    #+#             */
-/*   Updated: 2023/04/17 01:47:44 by simao            ###   ########.fr       */
+/*   Updated: 2023/04/17 12:11:37 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	draw_window(char **map_matrix, t_map_data *map_info)
 void	draw_walls(char **map_matrix, void *mlx, void *window)
 {
 	int		i;
+	int		j;
 	void	*left_corner;
 	void	*right_corner;
 	void	*top_mid;
@@ -41,6 +42,7 @@ void	draw_walls(char **map_matrix, void *mlx, void *window)
 	int		hght;
 
 	i = 0;
+	j = 0;
 	wdth = 32;
 	hght = 32;
 	left_corner = mlx_xpm_file_to_image(mlx, TOP_LFT_CRNR_PTH, &wdth, &hght);
@@ -60,11 +62,12 @@ void	draw_walls(char **map_matrix, void *mlx, void *window)
 		i++;
 	}
 	i = 0;
-	while (map_matrix[i][0] < 5)
+	while (map_matrix[j][0] < 5)
 	{
-		if (i != 0)
+		if (j != 0)
 			mlx_put_image_to_window(mlx, window, lft_mid_wall, 0, 32 * i);
-		i++;
+		printf("%c ", map_matrix[j][0]);
+		j++;
 	}
 }
 

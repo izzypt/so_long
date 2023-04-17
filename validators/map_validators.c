@@ -3,21 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   map_validators.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagalha <smagalha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 15:45:08 by smagalha          #+#    #+#             */
-/*   Updated: 2023/04/16 18:38:09 by smagalha         ###   ########.fr       */
+/*   Updated: 2023/04/17 00:39:13 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
+int	validate_map(char **map, t_map_data *map_info)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	validate_edges(map[0], map[map_info->lines_num - 1]);
+	while (i < map_info->lines_num)
+	{
+		validate_line_len(map[i], map_info->line_len);
+		validate_sides(map[i], map_info->line_len - 2);
+		while (map[i][j] != '\0' && map[i][j] != '\n')
+		{
+			count_map_components(map[i][j], map_info);
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+	printf("The map is valid\n");
+	printf("Map info:\n");
+	printf("Walls: %d\n", map_info->walls_num);
+	printf("Floors: %d\n", map_info->floor_num);
+	printf("Collectibles: %d\n", map_info->collectables_num);
+	printf("Exits: %d\n", map_info->exit_num);
+	printf("Players: %d\n", map_info->players_num);
+	return (1);
+}
+
 int	validate_line_len(char *line, size_t valid_len)
 {
 	if (ft_strlen(line) != valid_len)
 	{
-		printf("original line length: %zu", valid_len);
-		printf("current line length: %zu", ft_strlen(line));
 		perror("Map lines must have the same length\n");
 		exit(1);
 	}
@@ -26,9 +54,6 @@ int	validate_line_len(char *line, size_t valid_len)
 
 int	validate_edges(char	*top_line, char *bottom_line)
 {
-	int	i;
-
-	i = 0;
 	while (*top_line != '\n')
 	{
 		if (*top_line != '1')

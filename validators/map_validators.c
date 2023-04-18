@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validators.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
+/*   By: smagalha <smagalha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 15:45:08 by smagalha          #+#    #+#             */
-/*   Updated: 2023/04/18 14:17:52 by simao            ###   ########.fr       */
+/*   Updated: 2023/04/18 21:55:23 by smagalha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ int	validate_map(char **matrix)
 		while (matrix[i][j] != '\0' && matrix[i][j] != '\n')
 		{
 			count_map_components(matrix[i][j]);
+			printf("%c", matrix[i][j]);
 			j++;
 		}
 		j = 0;
-		i++;
 	}
-	printf("The map is valid\n");
+	validate_collectable_nums();
 	draw_window();
 	return (1);
 }
@@ -84,20 +84,5 @@ int	validate_sides(char *line)
 		exit(1);
 		return (0);
 	}
-	return (1);
-}
-
-int	count_map_components(char element)
-{
-	if (element == 'C')
-		map()->collectables_num += 1;
-	if (element == '1')
-		map()->walls_num += 1;
-	if (element == '0')
-		map()->floor_num += 1;
-	if (element == 'P')
-		map()->players_num += 1;
-	if (element == 'E')
-		map()->exit_num += 1;
 	return (1);
 }

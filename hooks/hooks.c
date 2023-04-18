@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
+/*   By: smagalha <smagalha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 23:57:05 by simao             #+#    #+#             */
-/*   Updated: 2023/04/18 16:59:18 by simao            ###   ########.fr       */
+/*   Updated: 2023/04/18 19:35:34 by smagalha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ int	hook_handler(int keycode)
 
 int	move_up(void)
 {
-	printf("move_up()\n");
+	if (map()->matrix[player()->y - 1][player()->x] == 'C')
+		collect_items();
+	if (map()->matrix[player()->y][player()->x] == 'E')
+		handle_portal();
 	if (map()->matrix[player()->y - 1][player()->x] == '1')
 		return (0);
 	else
@@ -47,6 +50,10 @@ int	move_up(void)
 
 int	move_down(void)
 {
+	if (map()->matrix[player()->y + 1][player()->x] == 'C')
+		collect_items();
+	if (map()->matrix[player()->y][player()->x] == 'E')
+		handle_portal();
 	if (map()->matrix[player()->y + 1][player()->x] == '1')
 		return (0);
 	else
@@ -63,6 +70,10 @@ int	move_down(void)
 
 int	move_right(void)
 {
+	if (map()->matrix[player()->y][player()->x + 1] == 'C')
+		collect_items();
+	if (map()->matrix[player()->y][player()->x] == 'E')
+		handle_portal();
 	if (map()->matrix[player()->y][player()->x + 1] == '1')
 		return (0);
 	else
@@ -79,6 +90,10 @@ int	move_right(void)
 
 int	move_left(void)
 {
+	if (map()->matrix[player()->y][player()->x - 1] == 'C')
+		collect_items();
+	if (map()->matrix[player()->y][player()->x] == 'E')
+		handle_portal();
 	if (map()->matrix[player()->y][player()->x - 1] == '1')
 		return (0);
 	else

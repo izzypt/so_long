@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
+/*   By: smagalha <smagalha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 12:08:53 by simao             #+#    #+#             */
-/*   Updated: 2023/04/18 16:02:13 by simao            ###   ########.fr       */
+/*   Updated: 2023/04/18 21:14:40 by smagalha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
+
+t_portal	*portal(void)
+{
+	static t_portal	exit;
+
+	return (&exit);
+}
 
 t_map_data	*map(void)
 {
@@ -28,20 +35,6 @@ t_player	*player(void)
 
 int	exit_game(void)
 {
-	/*char	**matrix;
-	int		i;
-
-
-	i = 0;
-	matrix = map()->matrix;
-	mlx_destroy_window(map()->mlx, map()->win);
-	mlx_destroy_display(map()->mlx);
-	while (i < map()->lines_num)
-	{
-		free(matrix[i]);
-		i++;
-	}
-	free(matrix);*/
 	exit(0);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
+/*   By: smagalha <smagalha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 16:03:15 by smagalha          #+#    #+#             */
-/*   Updated: 2023/04/18 16:14:14 by simao            ###   ########.fr       */
+/*   Updated: 2023/04/18 20:57:15 by smagalha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ void	draw_window(void)
 	mlx_key_hook(map()->win, hook_handler, NULL);
 	mlx_hook(map()->win, 17, 0, exit_game, NULL);
 	init_sprites(&map()->spr);
-	draw_walls();
+	draw_map();
 	mlx_loop(map()->mlx);
 }
 
 
-void	draw_walls(void)
+void	draw_map(void)
 {
 	size_t	i;
 	int		j;
@@ -67,7 +67,10 @@ void	draw_walls(void)
 			if (matrix[j][i] == 'C')
 				mlx_put_image_to_window(map()->mlx, map()->win, map()->spr.fish, i * 32, j * 32);
 			if (matrix[j][i] == 'E')
-				mlx_put_image_to_window(map()->mlx, map()->win, map()->spr.exit, i * 32, j * 32);
+			{
+				portal()->x = i;
+				portal()->y = j;
+			}
 			i++;
 		}
 		i = 0;

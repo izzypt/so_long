@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
+/*   By: smagalha <smagalha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 13:55:50 by smagalha          #+#    #+#             */
-/*   Updated: 2023/04/18 15:44:11 by simao            ###   ########.fr       */
+/*   Updated: 2023/04/18 21:43:45 by smagalha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ char	**create_matrix(char *map_path)
 	if (map()->matrix == NULL)
 		exit(1);
 	while (++i < map()->lines_num)
-		map()->matrix [i] = get_next_line(fd);
-	map()->line_len = ft_strlen(map()->matrix [0]);
+		map()->matrix[i] = get_next_line(fd);
+	map()->line_len = ft_strlen(map()->matrix[0]);
 	validate_map(map()->matrix);
 	close(fd);
 	return (map()->matrix);

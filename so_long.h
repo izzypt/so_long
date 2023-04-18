@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
+/*   By: smagalha <smagalha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 14:28:01 by smagalha          #+#    #+#             */
-/*   Updated: 2023/04/18 16:53:34 by simao            ###   ########.fr       */
+/*   Updated: 2023/04/18 21:36:09 by smagalha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,25 @@
 # define S 115
 # define W 119
 
+typedef struct t_portal
+{
+	int	x;
+	int	y;
+}	t_portal;
+
 typedef struct t_sprites
 {
-	void	*rock;
-	void	*water;
-	void	*player_up;
-	void	*player_right;
-	void	*player_left;
-	void	*player_down;
-	void	*fish;
-	void	*exit;
-	int		width;
-	int		height;
+	void		*rock;
+	void		*water;
+	void		*player_up;
+	void		*player_right;
+	void		*player_left;
+	void		*player_down;
+	void		*fish;
+	t_portal	portal;
+	void		*exit;
+	int			width;
+	int			height;
 }	t_sprites;
 
 typedef struct t_map_data
@@ -50,7 +57,7 @@ typedef struct t_map_data
 	char		**matrix;
 	int			lines_num;
 	size_t		line_len;
-	int			collectables_num;
+	int			collectable_num;
 	int			walls_num;
 	int			players_num;
 	int			floor_num;
@@ -72,13 +79,15 @@ typedef struct t_player
 
 t_player	*player(void);
 t_map_data	*map(void);
+t_portal	*portal(void);
 int			validate_map(char **matrix);
 int			validate_line_len(char *line, size_t valid_len);
 int			validate_edges(char *top_line, char *bottom_line);
 int			validate_sides(char *line);
+void		validate_collectable_nums(void);
 int			count_map_components(char element);
 void		draw_window(void);
-void		draw_walls(void);
+void		draw_map(void);
 void		init_sprites(t_sprites *spr);
 char		*ft_strnstr(const char *big, const char *little, size_t len);
 int			hook_handler(int keycode);
@@ -87,5 +96,7 @@ int			move_down(void);
 int			move_left(void);
 int			move_right(void);
 int			exit_game(void);
+void		collect_items(void);
+void		handle_portal(void);
 
 #endif  

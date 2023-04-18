@@ -1,41 +1,38 @@
 NAME=SO_LONG
-CFLAGS= -Wall -Wextra
+CFLAGS=-Wall -Wextra
 CC=cc
-SRC=main.c get_next_line/get_next_line.c validators/map_validators.c graphics/draw.c
+SRC=main.c libs/get_next_line/get_next_line.c validators/map_validators.c graphics/draw.c hooks/hooks.c utils/utils.c
 
-MLX_LIB=mlx_linux/libmlx.a
+MLX_LIB=libs/mlx_linux/libmlx.a
 
-LIBFT_LIB=Libft_SB/libft.a
+LIBFT_LIB=libs/Libft_SB/libft.a
 
-PRINTF_LIB=printf/printf.a
+PRINTF_LIB=libs/printf/printf.a
 
-LDFLAGS= $(PRINTF_LIB) $(LIBFT_LIB) $(MLX_LIB) -lXext -lX11 -lm -lz -g -fsanitize=address
+LDFLAGS= $(PRINTF_LIB) $(LIBFT_LIB) $(MLX_LIB) -lXext -lX11 -lm -lz -g -fsanitize=address 
 
 all : $(NAME)
 
-$(NAME) : $(SRC) $(MLX_LIB) $(LIBFT_LIB) $(PRINTF_LIB)
-	$(CC) $(SRC) -o $(NAME) $(CFLAGS) $(LDFLAGS)
+$(NAME) : $(SRC) $(MLX_LIB) $(LIBFT_LIB) $(PRINTF_LIB) 
+	$(CC) $(SRC) -o $(NAME) $(CFLAGS) $(LDFLAGS) 
 
 $(MLX_LIB):
-	cd mlx_linux && make
+	cd libs/mlx_linux && make
 	cd ..
 
 $(LIBFT_LIB):
-	cd Libft_SB && make
+	cd libs/Libft_SB && make
 	cd ..
 
 $(PRINTF_LIB):
-	cd ./printf && make
+	cd libs/printf && make
 	cd ..
 
 clean:
 	rm -f $(NAME)
-	cd ./Libft_SB && make clean
-	cd ..
-	cd ./mlx_linux && make clean
-	cd ..
-	cd ./printf && make clean
-	cd ..
+	make -C libs/Libft_SB clean
+	make -C libs/mlx_linux clean
+	make -C libs/printf clean
 
 fclean:		clean
 		rm -rf $(NAME)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validators.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagalha <smagalha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 15:45:08 by smagalha          #+#    #+#             */
-/*   Updated: 2023/04/17 19:43:04 by smagalha         ###   ########.fr       */
+/*   Updated: 2023/04/18 14:17:52 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,7 @@ int	validate_map(char **matrix)
 		i++;
 	}
 	printf("The map is valid\n");
-	printf("Map info:\n");
-	printf("Walls: %d\n", map()->walls_num);
-	printf("Floors: %d\n", map()->floor_num);
-	printf("Collectibles: %d\n", map()->collectables_num);
-	printf("Exits: %d\n", map()->exit_num);
-	printf("Players: %d\n", map()->players_num);
+	draw_window();
 	return (1);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagalha <smagalha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 16:03:15 by smagalha          #+#    #+#             */
-/*   Updated: 2023/04/17 20:30:33 by smagalha         ###   ########.fr       */
+/*   Updated: 2023/04/18 16:14:14 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	init_sprites(t_sprites *spr)
 {
 	spr->rock = mlx_xpm_file_to_image(map()->mlx, ROCK, &spr->width, &spr->height);
-	printf("%p\n", spr->rock);
 	spr->water = mlx_xpm_file_to_image(map()->mlx, WATER, &spr->width, &spr->height);
 	spr->fish = mlx_xpm_file_to_image(map()->mlx, FISH, &spr->width, &spr->height);
 	spr->player_right = mlx_xpm_file_to_image(map()->mlx, PLAYER_RIGHT, &spr->width, &spr->height);
@@ -25,7 +24,7 @@ void	init_sprites(t_sprites *spr)
 	spr->exit = mlx_xpm_file_to_image(map()->mlx, EXIT, &spr->width, &spr->height);
 }
 
-void	draw_window(char **map_matrix)
+void	draw_window(void)
 {
 	int		win_wdth;
 	int		win_hght;
@@ -34,19 +33,23 @@ void	draw_window(char **map_matrix)
 	win_hght = (map()->lines_num) * 32;
 	map()->mlx = mlx_init();
 	map()->win = mlx_new_window(map()->mlx, win_wdth, win_hght, "SoLong");
+	mlx_key_hook(map()->win, hook_handler, NULL);
+	mlx_hook(map()->win, 17, 0, exit_game, NULL);
 	init_sprites(&map()->spr);
-	draw_walls(map_matrix);
+	draw_walls();
 	mlx_loop(map()->mlx);
 }
 
 
-void	draw_walls(char **matrix)
+void	draw_walls(void)
 {
 	size_t	i;
 	int		j;
+	char	**matrix;
 
 	i = 0;
 	j = 0;
+	matrix  = map()->matrix;
 	while (j < map()->lines_num)
 	{
 		while (i < map()->line_len)
@@ -56,7 +59,11 @@ void	draw_walls(char **matrix)
 			else
 				mlx_put_image_to_window(map()->mlx, map()->win, map()->spr.water, i * 32, j * 32);
 			if (matrix[j][i] == 'P')
+			{
 				mlx_put_image_to_window(map()->mlx, map()->win, map()->spr.player_right, i * 32, j * 32);
+				player()->x = i;
+				player()->y = j;
+			}
 			if (matrix[j][i] == 'C')
 				mlx_put_image_to_window(map()->mlx, map()->win, map()->spr.fish, i * 32, j * 32);
 			if (matrix[j][i] == 'E')
@@ -66,9 +73,4 @@ void	draw_walls(char **matrix)
 		i = 0;
 		j++;
 	}
-}
-
-void	draw_player()
-{
-	mlx_put_image_to_window(map()->mlx, map()->win, map()->spr.player_right, 70, 70);
 }

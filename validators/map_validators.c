@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validators.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagalha <smagalha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 15:45:08 by smagalha          #+#    #+#             */
-/*   Updated: 2023/04/18 22:00:57 by smagalha         ###   ########.fr       */
+/*   Updated: 2023/04/19 00:04:03 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	validate_map(char **matrix)
 		while (matrix[i][j] != '\0' && matrix[i][j] != '\n')
 		{
 			count_map_components(matrix[i][j]);
-			printf("%c", matrix[i][j]);
 			j++;
 		}
 		j = 0;

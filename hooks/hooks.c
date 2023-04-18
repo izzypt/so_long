@@ -14,7 +14,6 @@
 
 int	hook_handler(int keycode)
 {
-	printf("Hello from key_hook %d!\n", keycode);
 	if (keycode == ESC)
 		exit_game();
 	if (keycode == A)
@@ -39,6 +38,7 @@ int	move_up(void)
 	else
 	{
 		player()->num_moves++;
+		ft_printf("Moves: %d",player()->num_moves);
 		mlx_put_image_to_window(map()->mlx, map()->win, \
 		map()->spr.water, player()->x * 32, player()->y * 32);
 		player()->y -= 1;
@@ -59,6 +59,7 @@ int	move_down(void)
 	else
 	{
 		player()->num_moves++;
+		ft_printf("Moves: %d",player()->num_moves);
 		mlx_put_image_to_window(map()->mlx, map()->win, \
 		map()->spr.water, player()->x * 32, player()->y * 32);
 		player()->y += 1;
@@ -79,6 +80,7 @@ int	move_right(void)
 	else
 	{
 		player()->num_moves++;
+		ft_printf("Moves: %d\n",player()->num_moves);
 		mlx_put_image_to_window(map()->mlx, map()->win, map()->spr.water, \
 		player()->x * 32, player()->y * 32);
 		player()->x += 1;
@@ -99,6 +101,7 @@ int	move_left(void)
 	else
 	{
 		player()->num_moves++;
+		ft_printf("Moves: %d",player()->num_moves);
 		mlx_put_image_to_window(map()->mlx, map()->win, map()->spr.water, \
 		player()->x * 32, player()->y * 32);
 		player()->x -= 1;

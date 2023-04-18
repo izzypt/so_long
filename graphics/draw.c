@@ -37,6 +37,7 @@ void	draw_window(void)
 	mlx_hook(map()->win, 17, 0, exit_game, NULL);
 	init_sprites(&map()->spr);
 	draw_map();
+	mlx_string_put(map()->mlx, map()->win, 50, 50, 0xFFFFFF, "Moves:");
 	mlx_loop(map()->mlx);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
+/*   By: smagalha <smagalha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 14:28:01 by smagalha          #+#    #+#             */
-/*   Updated: 2023/04/19 12:22:34 by simao            ###   ########.fr       */
+/*   Updated: 2023/04/19 17:13:03 by smagalha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,11 @@ void		validate_collectable_nums(void);
 int			count_map_components(char element);
 void		draw_window(void);
 void		draw_map(void);
+void		draw_player(int i, int j);
+void		draw_water(int i, int j);
+void		draw_fish(int i, int j);
+void		draw_rock(int i, int j);
+void		draw_moves_str(void);
 void		init_sprites(t_sprites *spr);
 char		*ft_strnstr(const char *big, const char *little, size_t len);
 int			hook_handler(int keycode);
@@ -99,8 +104,8 @@ int			exit_game(void);
 void		collect_items(void);
 void		handle_portal(void);
 char		*player_moves(void);
-void		draw_moves_str(void);
 char		*ft_itoa(int nb);
 size_t		ft_decimal_places(int n);
+void		set_portal_cord(int i, int j);
 
 #endif  

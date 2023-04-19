@@ -56,3 +56,9 @@ char	*ft_itoa(int nb)
 	}
 	return (str);
 }
+
+void	set_portal_cord(int i, int j)
+{
+	portal()->x = i;
+	portal()->y = j;
+}

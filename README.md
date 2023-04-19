@@ -1,7 +1,7 @@
 
 # MinilibX - Introduction
 
-MiniLibx is a small library developed by 42. 
+MiniLibx is a C small library developed by 42. 
 
 Provides an easy way to create graphical software, without any X-Window programming knowledge. 
 

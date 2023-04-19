@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagalha <smagalha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 12:08:53 by simao             #+#    #+#             */
-/*   Updated: 2023/04/18 21:14:40 by smagalha         ###   ########.fr       */
+/*   Updated: 2023/04/19 12:07:46 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,3 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	}
 	return (0);
 }
-

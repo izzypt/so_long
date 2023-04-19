@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagalha <smagalha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 14:28:01 by smagalha          #+#    #+#             */
-/*   Updated: 2023/04/18 21:36:09 by smagalha         ###   ########.fr       */
+/*   Updated: 2023/04/19 12:22:34 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,9 @@ int			move_right(void);
 int			exit_game(void);
 void		collect_items(void);
 void		handle_portal(void);
+char		*player_moves(void);
+void		draw_moves_str(void);
+char		*ft_itoa(int nb);
+size_t		ft_decimal_places(int n);
 
 #endif  

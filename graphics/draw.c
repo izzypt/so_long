@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagalha <smagalha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 16:03:15 by smagalha          #+#    #+#             */
-/*   Updated: 2023/04/18 20:57:15 by smagalha         ###   ########.fr       */
+/*   Updated: 2023/04/19 13:41:47 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,18 @@ void	init_sprites(t_sprites *spr)
 
 void	draw_window(void)
 {
-	int		win_wdth;
-	int		win_hght;
+	int		win_wth;
+	int		win_hgt;
 
-	win_wdth = (map()->line_len - 1) * 32;
-	win_hght = (map()->lines_num) * 32;
+	win_wth = (map()->line_len - 1) * 32;
+	win_hgt = (map()->lines_num) * 32;
 	map()->mlx = mlx_init();
-	map()->win = mlx_new_window(map()->mlx, win_wdth, win_hght, "SoLong");
+	map()->win = mlx_new_window(map()->mlx, win_wth, win_hgt, "SoLong");
 	mlx_key_hook(map()->win, hook_handler, NULL);
 	mlx_hook(map()->win, 17, 0, exit_game, NULL);
 	init_sprites(&map()->spr);
 	draw_map();
-	mlx_string_put(map()->mlx, map()->win, 50, 50, 0xFFFFFF, "Moves:");
+	mlx_string_put(map()->mlx, map()->win, 48, 48, 0x000000, "0");
 	mlx_loop(map()->mlx);
 }
 
@@ -77,4 +77,14 @@ void	draw_map(void)
 		i = 0;
 		j++;
 	}
+}
+
+void draw_moves_str(void)
+{
+    char *moves;
+
+    moves = ft_itoa(player()->num_moves);
+    mlx_put_image_to_window(map()->mlx, map()->win, map()->spr.water, 32, 32);
+    mlx_string_put(map()->mlx, map()->win, 48, 48, 0x000000, moves);
+    free(moves);
 }

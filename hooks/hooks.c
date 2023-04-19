@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagalha <smagalha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 23:57:05 by simao             #+#    #+#             */
-/*   Updated: 2023/04/18 19:35:34 by smagalha         ###   ########.fr       */
+/*   Updated: 2023/04/19 13:35:46 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@ int	move_up(void)
 {
 	if (map()->matrix[player()->y - 1][player()->x] == 'C')
 		collect_items();
-	if (map()->matrix[player()->y][player()->x] == 'E')
+	if (map()->matrix[player()->y - 1][player()->x] == 'E')
 		handle_portal();
 	if (map()->matrix[player()->y - 1][player()->x] == '1')
 		return (0);
 	else
 	{
 		player()->num_moves++;
-		ft_printf("Moves: %d",player()->num_moves);
+		draw_moves_str();
 		mlx_put_image_to_window(map()->mlx, map()->win, \
 		map()->spr.water, player()->x * 32, player()->y * 32);
 		player()->y -= 1;
@@ -52,14 +52,14 @@ int	move_down(void)
 {
 	if (map()->matrix[player()->y + 1][player()->x] == 'C')
 		collect_items();
-	if (map()->matrix[player()->y][player()->x] == 'E')
+	if (map()->matrix[player()->y + 1][player()->x] == 'E')
 		handle_portal();
 	if (map()->matrix[player()->y + 1][player()->x] == '1')
 		return (0);
 	else
 	{
 		player()->num_moves++;
-		ft_printf("Moves: %d",player()->num_moves);
+		draw_moves_str();
 		mlx_put_image_to_window(map()->mlx, map()->win, \
 		map()->spr.water, player()->x * 32, player()->y * 32);
 		player()->y += 1;
@@ -73,14 +73,14 @@ int	move_right(void)
 {
 	if (map()->matrix[player()->y][player()->x + 1] == 'C')
 		collect_items();
-	if (map()->matrix[player()->y][player()->x] == 'E')
+	if (map()->matrix[player()->y][player()->x + 1] == 'E')
 		handle_portal();
 	if (map()->matrix[player()->y][player()->x + 1] == '1')
 		return (0);
 	else
 	{
 		player()->num_moves++;
-		ft_printf("Moves: %d\n",player()->num_moves);
+		draw_moves_str();
 		mlx_put_image_to_window(map()->mlx, map()->win, map()->spr.water, \
 		player()->x * 32, player()->y * 32);
 		player()->x += 1;
@@ -94,14 +94,14 @@ int	move_left(void)
 {
 	if (map()->matrix[player()->y][player()->x - 1] == 'C')
 		collect_items();
-	if (map()->matrix[player()->y][player()->x] == 'E')
+	if (map()->matrix[player()->y][player()->x - 1] == 'E')
 		handle_portal();
 	if (map()->matrix[player()->y][player()->x - 1] == '1')
 		return (0);
 	else
 	{
 		player()->num_moves++;
-		ft_printf("Moves: %d",player()->num_moves);
+		draw_moves_str();
 		mlx_put_image_to_window(map()->mlx, map()->win, map()->spr.water, \
 		player()->x * 32, player()->y * 32);
 		player()->x -= 1;

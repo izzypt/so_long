@@ -6,7 +6,7 @@
 /*   By: smagalha <smagalha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 16:03:15 by smagalha          #+#    #+#             */
-/*   Updated: 2023/04/19 17:17:28 by smagalha         ###   ########.fr       */
+/*   Updated: 2023/04/19 19:44:26 by smagalha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,10 @@ void	draw_map(void)
 
 void	draw_player(int i, int j)
 {
-	mlx_put_image_to_window(\
-	map()->mlx, map()->win, map()->spr.player_right, i * 32, j * 32);
 	player()->x = i;
 	player()->y = j;
+	mlx_put_image_to_window(\
+	map()->mlx, map()->win, map()->spr.player_right, i * 32, j * 32);
 }
 
 void	draw_moves_str(void)

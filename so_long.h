@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
+/*   By: smagalha <smagalha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 14:28:01 by smagalha          #+#    #+#             */
-/*   Updated: 2023/04/20 12:17:14 by simao            ###   ########.fr       */
+/*   Updated: 2023/04/20 19:25:49 by smagalha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@
 # define D 100
 # define S 115
 # define W 119
+
+typedef struct t_map_clone
+{
+	char	**clone;
+}	t_map_clone;
 
 typedef struct t_portal
 {
@@ -80,6 +85,7 @@ typedef struct t_player
 t_player	*player(void);
 t_map_data	*map(void);
 t_portal	*portal(void);
+t_map_clone	*map_clone(void);
 int			validate_map(char **matrix);
 int			validate_line_len(char *line, size_t valid_len);
 int			validate_edges(char *top_line, char *bottom_line);
@@ -108,6 +114,9 @@ char		*ft_itoa(int nb);
 size_t		ft_decimal_places(int n);
 void		set_portal_cord(int i, int j);
 char		**make_clone(char **matrix);
-void		fill_clone(char **matriz, int x, int y);
+void		fill_clone(char **matriz, int x, int y, int *counter);
+void		validate_clone(char **matriz);
+void		free_clone(char **matriz);
+char		**make_clone(char **matrix);
 
 #endif  

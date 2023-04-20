@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 19:40:26 by smagalha          #+#    #+#             */
-/*   Updated: 2023/04/20 12:10:47 by simao            ###   ########.fr       */
+/*   Updated: 2023/04/20 12:36:08 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ void	validate_clone(char **matriz)
 		i++;
 		ft_printf("\n");
 	}
-	if (i == map()->lines_num)
-		free_clone(matriz);
+	//free_clone(matriz);
 }
 
 void	fill_clone(char **matriz, int x, int y)
 {
+
 	if (x < 0 || y < 0 || x >= map()->line_len || y >= map()->lines_num)
 		return ;
 

@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 14:28:01 by smagalha          #+#    #+#             */
-/*   Updated: 2023/04/20 00:11:24 by simao            ###   ########.fr       */
+/*   Updated: 2023/04/20 12:17:14 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void		draw_water(int i, int j);
 void		draw_fish(int i, int j);
 void		draw_rock(int i, int j);
 void		draw_moves_str(void);
-void		init_sprites(t_sprites *spr);
+void		create_images(t_sprites *spr);
 char		*ft_strnstr(const char *big, const char *little, size_t len);
 int			hook_handler(int keycode);
 int			move_up(void);

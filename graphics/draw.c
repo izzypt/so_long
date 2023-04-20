@@ -6,13 +6,13 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 16:03:15 by smagalha          #+#    #+#             */
-/*   Updated: 2023/04/19 22:52:13 by simao            ###   ########.fr       */
+/*   Updated: 2023/04/20 12:17:24 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void	init_sprites(t_sprites *spr)
+void	create_images(t_sprites *spr)
 {
 	spr->rock = mlx_xpm_file_to_image(\
 	map()->mlx, ROCK, &spr->width, &spr->height);
@@ -45,7 +45,7 @@ void	draw_window(void)
 	map()->win = addr;
 	mlx_key_hook(map()->win, hook_handler, NULL);
 	mlx_hook(map()->win, 17, 0, exit_game, NULL);
-	init_sprites(&map()->spr);
+	create_images(&map()->spr);
 	draw_map();
 	mlx_string_put(map()->mlx, map()->win, 48, 48, 0x000000, "0");
 	mlx_loop(map()->mlx);

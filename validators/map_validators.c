@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validators.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagalha <smagalha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 15:45:08 by smagalha          #+#    #+#             */
-/*   Updated: 2023/04/19 19:45:12 by smagalha         ###   ########.fr       */
+/*   Updated: 2023/04/20 11:59:03 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,13 @@ int	validate_map(char **matrix)
 		validate_sides(matrix[i]);
 		while (matrix[i][j] != '\0' && matrix[i][j] != '\n')
 		{
-			count_map_components(matrix[i][j]);
+			register_map_components(matrix[i][j], j, i);
 			j++;
 		}
 		j = 0;
 	}
 	validate_collectable_nums();
+	make_clone(map()->matrix);
 	draw_window();
 	return (1);
 }

@@ -6,18 +6,22 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 18:23:18 by smagalha          #+#    #+#             */
-/*   Updated: 2023/04/19 00:12:05 by simao            ###   ########.fr       */
+/*   Updated: 2023/04/19 22:53:25 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-int	count_map_components(char element)
+int	register_map_components(char element, int x, int y)
 {
 	if (element == 'C')
 		map()->collectable_num++;
 	if (element == 'P')
+	{
 		map()->players_num++;
+		player()->x = x;
+		player()->y = y;
+	}
 	if (element == 'E')
 		map()->exit_num++;
 	return (1);

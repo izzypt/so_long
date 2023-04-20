@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagalha <smagalha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 14:28:01 by smagalha          #+#    #+#             */
-/*   Updated: 2023/04/19 17:13:03 by smagalha         ###   ########.fr       */
+/*   Updated: 2023/04/20 00:11:24 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int			validate_line_len(char *line, size_t valid_len);
 int			validate_edges(char *top_line, char *bottom_line);
 int			validate_sides(char *line);
 void		validate_collectable_nums(void);
-int			count_map_components(char element);
+int			register_map_components(char element, int x, int y);
 void		draw_window(void);
 void		draw_map(void);
 void		draw_player(int i, int j);
@@ -107,5 +107,7 @@ char		*player_moves(void);
 char		*ft_itoa(int nb);
 size_t		ft_decimal_places(int n);
 void		set_portal_cord(int i, int j);
+char		**make_clone(char **matrix);
+void		fill_clone(char **matriz, int x, int y);
 
 #endif  
